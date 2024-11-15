@@ -12,9 +12,8 @@ router.post('/login',userController.loginController)
 // add-task : http://localhost:3000/add-task
 router.post('/add-task',taskController.addtaskController)
 
-// view-user-details : http://localhost:3000/view-user-details
-// router.get('/view-user-details',jtwMiddlware,userController.viewUserDetailsController)
-
+// tasks/:userId : http://localhost:3000/tasks/673726024086cfcae821364e
+router.get('/tasks/:userId',taskController.getTasksByUserController)
 
 
 

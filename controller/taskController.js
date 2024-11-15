@@ -26,15 +26,20 @@ exports.addtaskController = async (req,res)=>{
 
 }
 
-// get all tasks
-exports.getAllTasksController = async (req, res) => {
-    console.log("inside getAllTasksController");
-    const userId = req.params.userId; 
+
+// Get all tasks for a specific user
+exports.getTasksByUserController = async (req, res) => {
+    console.log("inside getTasksByUserController");
+
+    const { userId } = req.params
     try {
-        const tasks = await Task.find({ userId: userId }); 
-        res.status(200).json(tasks);
+        const userTasks = await tasks.find({ userId })
+        if (userTasks.length > 0) {
+            res.status(200).json(userTasks)
+        } else {
+            res.status(404).json("No tasks found for this user");
+        }
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Internal server error" }); 
+        console.log(err);
     }
-};
+}
